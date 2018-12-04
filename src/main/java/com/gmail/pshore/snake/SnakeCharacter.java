@@ -13,15 +13,18 @@ public class SnakeCharacter {
 	
 	
 	/** 
-	 * Initialise the Snake, optionally with a single head at position 0,0. 
+	 * Initialise the Snake, optionally with a single head at the given position.
 	 * @param createHead pass true to create the head of the snake. 
+	 * @param x the X coordinate on the screen. 0 is leftmost.
+	 * @param y the Y coordinate on the screen. 0 is topmost.
 	 */
-	public SnakeCharacter(boolean createHead) {
+	public SnakeCharacter(boolean createHead, int x, int y) {
 		if(createHead) {
-			positions.add(new Gridref(0,0));
+			positions.add(new Gridref(x,y));
 		}
 	}
-
+	
+	
 	/** 
 	 * Construct a Snake from a two dimensional array.
 	 * Each element in the outer array must contain two integers with x at index 0, and y at index 1.
