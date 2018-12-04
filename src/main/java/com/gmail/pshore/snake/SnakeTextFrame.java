@@ -7,7 +7,7 @@ import java.util.List;
  * 
  * @author Phil Shore pshore2@gmail.com
  */
-public class SnakeTextScreen extends TextScreen {
+public class SnakeTextFrame extends TextFrame {
 	
 	char HEAD_CHAR='@';
 	char BODY_CHAR='o';
@@ -15,7 +15,7 @@ public class SnakeTextScreen extends TextScreen {
 	SnakeCharacter snake;
 
 	
-	public SnakeTextScreen(int width, int height) {
+	public SnakeTextFrame(int width, int height) {
 		super(width, height); // setup the rows.
 	}
 
@@ -29,7 +29,7 @@ public class SnakeTextScreen extends TextScreen {
 	}
 
 	/**
-	 * Draw the Snake onto this screen.
+	 * Draw the Snake onto this frame.
 	 * 
 	 * Assumes that the Snake has not gone off screen.
 	 */
@@ -38,6 +38,8 @@ public class SnakeTextScreen extends TextScreen {
 		List<Gridref> gridrefs = snake.getPositions();
 		for(int g=0; g<gridrefs.size(); g++) {
 			Gridref gridref = gridrefs.get(g);
+			
+			// set the character at the gridref position
 			rows.get(gridref.getY())
 				.setCharAt(gridref.getX(), (g==0 ? HEAD_CHAR : BODY_CHAR) );
 		}

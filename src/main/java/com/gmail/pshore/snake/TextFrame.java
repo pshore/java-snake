@@ -7,11 +7,11 @@ import java.util.List;
  * Represents a complete screenfull of characters in two dimensions.
  * 
  * The data structure makes drawing on the screen simplistic, i.e. each row, top to bottom,
- * Higher performance will be possible with alternative approaches.  
+ * Higher performance will be possible with alternative approaches.
  * 
  * @author Phil Shore pshore2@gmail.com
  */
-public abstract class TextScreen {
+public abstract class TextFrame {
 	
 	static int DEFAULT_WIDTH=80;
 	static int DEFAULT_HEIGHT=25;
@@ -23,12 +23,12 @@ public abstract class TextScreen {
 	
 	/** Default constructor.  Initialises the data to the default screen size. */
 	@SuppressWarnings("unused")
-	private TextScreen() {
+	private TextFrame() {
 		initData();
 	}
 	
 	/** Alternative constructor for a specified width and height. */
-	public TextScreen(int width, int height) {
+	public TextFrame(int width, int height) {
 		this.width=width;
 		this.height=height;	
 		initData();
@@ -39,14 +39,17 @@ public abstract class TextScreen {
 		rows = new ArrayList<StringBuffer>(this.height);
 		for(int i=0; i<this.height; i++) {
 			StringBuffer sb = new StringBuffer(this.width);
+			
+			// fill with spaces
 			for(int w=0; w<this.width; w++)
 				sb.append(' ');
+			
 			rows.add(sb);
 		}
 	}
 	
 	/** 
-	 * Construct a new frame of text ready to be drawn to the screen.
+	 * Construct a new frame of text ready to be drawn to a screen.
 	 */
 	abstract void updateFrame();
 	
@@ -77,8 +80,8 @@ public abstract class TextScreen {
 	 * A utility function to output the contents of the screen 
 	 * Useful for debugging.
 	 */
-	public static void outputScreen(TextScreen screen) {
-		for(StringBuffer row : screen.rows) {
+	public static void outputFrame(TextFrame frame) {
+		for(StringBuffer row : frame.rows) {
 			System.out.println(row.toString());
 		}
 	}

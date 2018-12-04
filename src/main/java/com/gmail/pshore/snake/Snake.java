@@ -9,8 +9,8 @@ package com.gmail.pshore.snake;
  */
 public class Snake {
 
-	int screenW  = TextScreen.DEFAULT_WIDTH;
-	int screenH = TextScreen.DEFAULT_HEIGHT;
+	int screenW  = TextFrame.DEFAULT_WIDTH;
+	int screenH = TextFrame.DEFAULT_HEIGHT;
 	
 	/** Constructor */
 	public Snake() {
@@ -22,7 +22,7 @@ public class Snake {
 	void startGame() throws InterruptedException {
 		
 		// a screen to draw the snake on.
-		SnakeTextScreen snakeScreen = new SnakeTextScreen(screenW, screenH);
+		SnakeTextFrame snakeScreen = new SnakeTextFrame(screenW, screenH);
 
 		// create the Snake with head in the middle of the screen.
 		SnakeCharacter snake = new SnakeCharacter(true, screenW/2, screenH/2);
@@ -34,8 +34,8 @@ public class Snake {
 		// Test drawing the screen 
 		for(int i=0; i<moves.length; i++) {
 			snakeScreen.updateFrame();
-			TextScreen.outputScreen(snakeScreen);// print to stdout
-			Thread.sleep(500);
+			TextFrame.outputFrame(snakeScreen);// print to stdout
+			Thread.sleep(250);
 			snake.follow( new Gridref(moves[i][0], moves[i][1]) );
 		}
 		
