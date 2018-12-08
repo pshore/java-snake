@@ -3,9 +3,9 @@ package com.gmail.pshore.snake;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SnakeCharacter {
+public class SnakeCharacter implements ScreenObject {
 
-	List<Gridref> positions = new ArrayList<Gridref>();
+	private List<Gridref> positions = new ArrayList<Gridref>();
 
 	/** Initialise the Snake with no initial head. */
 	public SnakeCharacter() {		
@@ -13,17 +13,14 @@ public class SnakeCharacter {
 	
 	
 	/** 
-	 * Initialise the Snake, optionally with a single head at the given position.
+	 * Initialise the Snake with a single poistion, the head, at the given position.
 	 * @param createHead pass true to create the head of the snake. 
 	 * @param x the X coordinate on the screen. 0 is leftmost.
 	 * @param y the Y coordinate on the screen. 0 is topmost.
 	 */
-	public SnakeCharacter(boolean createHead, int x, int y) {
-		if(createHead) {
-			positions.add(new Gridref(x,y));
-		}
+	public SnakeCharacter(int x, int y) {
+		positions.add(new Gridref(x,y));
 	}
-	
 	
 	/** 
 	 * Construct a Snake from a two dimensional array.
@@ -32,26 +29,37 @@ public class SnakeCharacter {
 	 * @param refs
 	 */
 	public SnakeCharacter( int[][] refs) {
-		add(refs);
+		addAll(refs);
 	}
 	
 	/**
 	 * @return the positions
 	 */
+	@Override
 	public List<Gridref> getPositions() {
 		return positions;
-	}	
-
+	}
+	
+	/**
+	 * Sets a List of screen positions for this Snake.
+	 * @param positions
+	 * @
+	 */
+	@Override
+	public void setPositions(List<Gridref> positions) {
+		this.positions = positions;
+	}
 	
 	/** Adds positions to the end of the snake */
-	public boolean add( int[][] refs ) {
-		if(refs==null) return false; // leave the snake empty.
-		if(refs.length==0) return false;
+	public boolean addAll( int[][] refs ) {
 		
-		for(int i=0; i<refs.length; i++) {
-			int[] ref = refs[i];
-			this.add(ref[0], ref[1]);
-		}
+		// do nothing with an empty list
+		if(refs==null || refs.length==0) 
+			return false; 
+
+		// add all
+		for(int[] ref : refs)
+			add(ref[0], ref[1]);
 		
 		return true;
 	}
@@ -92,24 +100,26 @@ public class SnakeCharacter {
 	 * @return 
 	 */
 	public Gridref follow(Gridref relative) throws IndexOutOfBoundsException {
-		// check the input
+		
+		/* check the input */
 		if(relative==null) 
 			throw new NullPointerException("Cannot follow a 'null' relative reference");
 		if(positions.isEmpty())
 			throw new IndexOutOfBoundsException("An empty snake cannot follow a direction");
+		
 		// check the movement is within range
 		if(relative.getX()<-1 || relative.getX()>1)
 			throw new IndexOutOfBoundsException("X is out of range");
 		if(relative.getY()<-1 || relative.getY()>1)
 			throw new IndexOutOfBoundsException("Y is out of range");
 
-		// now follow the direction
-		int headX = positions.get(0).getX();
-		int headY = positions.get(0).getY();
+		/* now follow the direction */
+		int currHeadX = positions.get(0).getX();
+		int currHeadY = positions.get(0).getY();
 		
 		positions.remove( positions.size()-1 ); // remove the tail
-		Gridref newHead = new Gridref( headX+relative.getX(), headY+relative.getY() );		
-		positions.add(0, newHead); // add the new head at the front.
+		Gridref newHeadPosition = new Gridref( currHeadX+relative.getX(), currHeadY+relative.getY() );		
+		positions.add(0, newHeadPosition); // add the new head at the front.
 		
 		return positions.get(0);
 	}
@@ -133,6 +143,37 @@ public class SnakeCharacter {
 		}
 		
 		return true;
+	}
+
+	/**
+	 * Checks if this Snake contains the given position. 
+	 * 
+	 * This would indicate a collision for example.
+	 * 
+	 * @return true when the Snake occupies the same as the given position.
+	 */
+	@Override
+	public boolean contains(Gridref position) {
+
+		for(Gridref snakePos : positions) {
+			if(snakePos.equals(position))
+				return true;
+		}
+
+		return false;
+	}
+
+
+	/** Checks if this Snake has any of the given positions. */
+	@Override
+	public boolean containsAny(List<Gridref> positions) {
+		
+		for(Gridref position : positions) {
+			if( contains(position) )
+				return true;
+		}
+		
+		return false;
 	}
 	
 	

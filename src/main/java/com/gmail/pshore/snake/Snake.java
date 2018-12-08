@@ -25,9 +25,12 @@ public class Snake {
 		SnakeTextFrame snakeScreen = new SnakeTextFrame(screenW, screenH);
 
 		// create the Snake with head in the middle of the screen.
-		SnakeCharacter snake = new SnakeCharacter(true, screenW/2, screenH/2);
+		SnakeCharacter snake = new SnakeCharacter(screenW/2, screenH/2);
 		snakeScreen.setSnake(snake); // put it on the screen.
 
+		
+		/* Demo the moves. There is no user control yet. */
+		
 		// some automated moves before we write the user control feature.
 		int[][] moves = new int[][] { {-1,0},{-1,0},{-1,0},{0,1},{0,1},{0,1},{1,0},{1,0},{1,0},{0,-1},{0,-1},{0,-1} };
 		
