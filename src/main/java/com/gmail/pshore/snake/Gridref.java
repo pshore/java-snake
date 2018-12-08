@@ -59,7 +59,7 @@ public class Gridref implements Cloneable {
 	public boolean equals(int x, int y) {
 		return (this.x==x && this.y==y);
 	}
-
+	
 	/**
 	 * Return true if x and y values are the same.
 	 */

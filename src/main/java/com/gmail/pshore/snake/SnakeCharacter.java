@@ -1,5 +1,7 @@
 package com.gmail.pshore.snake;
 
+import java.util.Objects;
+
 public class SnakeCharacter extends ScreenObject implements IScreenObject {
 
 	/** Initialise the Snake with no initial head. */
@@ -100,26 +102,5 @@ public class SnakeCharacter extends ScreenObject implements IScreenObject {
 		
 		return positions.get(0);
 	}
-
-	/**
-	 * Check the size and positions are equal.
-	 * 
-	 * @param refs
-	 * @return boolean true if the same size and positions.
-	 */
-	public boolean sameGridrefs( int[][] refs) {
-		SnakeCharacter c = new SnakeCharacter( refs );
-
-		if( this.positions.isEmpty() && c.positions.isEmpty() ) return true;
-		if( this.positions.isEmpty() != c.positions.isEmpty() ) return false;
-		if( this.positions.size()    != c.positions.size()    ) return false;
-		
-		for(int i=0; i<this.positions.size(); i++) {
-			if( ! this.positions.get(i).equals( c.getPositions().get(i) ) )
-				return false;
-		}
-		
-		return true;
-	}
-
+	
 }

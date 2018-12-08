@@ -1,6 +1,9 @@
 package com.gmail.pshore.snake;
 
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+
 import org.junit.Test;
 import com.gmail.pshore.snake.SnakeCharacter;
 
@@ -85,51 +88,55 @@ public class SnakeCharacterTest {
 	public void testFollowSizeThree() {
 		SnakeCharacter c;    // the character to be moved.
 
+		// initial starting position.
+		c = new SnakeCharacter( new int[][] { { 0, 0},{ 1, 0},{ 2, 0} } );  
+		// ensure 'equals' functions as expected
+		assertTrue( c.equals( new SnakeCharacter( new int[][] { { 0, 0},{ 1, 0},{ 2, 0} } ) ) );
+		
 		// left 1. Starts with head on the left, pointing left.
-		c = new SnakeCharacter(     new int[][] { { 0, 0},{ 1, 0},{ 2, 0} } );  
 		c.followLeft();
-		assertTrue( c.sameGridrefs( new int[][] { {-1, 0},{ 0, 0},{ 1, 0} } ) );
+		assertTrue( c.equals( new SnakeCharacter( new int[][] { {-1, 0},{ 0, 0},{ 1, 0} } ) ) );
 		
 		// right 1. Starts with head on the right, pointing right.
-		c = new SnakeCharacter(     new int[][] { { 0, 0},{-1, 0},{-2, 0} } ); 
+		c = new SnakeCharacter( new int[][] { { 0, 0},{-1, 0},{-2, 0} } ); 
 		c.followRight();
-		assertTrue( c.sameGridrefs( new int[][] { { 1, 0},{ 0, 0},{-1, 0} } ) );
+		assertTrue( c.equals( new SnakeCharacter( new int[][] { { 1, 0},{ 0, 0},{-1, 0} } ) ) );
 		
 		// Circle anti-clockwise down. Starts with head on the left, pointing left.
 		// The head goes through this shape. 0 thru 5 then back to 0.
 		// 054
 		// 123
-		c = new SnakeCharacter(     new int[][] { { 0, 0},{ 1, 0},{ 2, 0} } );  
+		c = new SnakeCharacter( new int[][] { { 0, 0},{ 1, 0},{ 2, 0} } );  
 		c.followDown();
-		assertTrue( c.sameGridrefs( new int[][] { { 0, 1},{ 0, 0},{ 1, 0} } ) );
+		assertTrue( c.equals( new SnakeCharacter( new int[][] { { 0, 1},{ 0, 0},{ 1, 0} } ) ) );
 		c.followRight();
-		assertTrue( c.sameGridrefs( new int[][] { { 1, 1},{ 0, 1},{ 0, 0} } ) );
+		assertTrue( c.equals( new SnakeCharacter( new int[][] { { 1, 1},{ 0, 1},{ 0, 0} } ) ) );
 		c.followRight();
-		assertTrue( c.sameGridrefs( new int[][] { { 2, 1},{ 1, 1},{ 0, 1} } ) );		
+		assertTrue( c.equals( new SnakeCharacter( new int[][] { { 2, 1},{ 1, 1},{ 0, 1} } ) ) );		
 		c.followUp();
-		assertTrue( c.sameGridrefs( new int[][] { { 2, 0},{ 2, 1},{ 1, 1} } ) );
+		assertTrue( c.equals( new SnakeCharacter( new int[][] { { 2, 0},{ 2, 1},{ 1, 1} } ) ) );
 		c.followLeft();
-		assertTrue( c.sameGridrefs( new int[][] { { 1, 0},{ 2, 0},{ 2, 1} } ) );		
+		assertTrue( c.equals( new SnakeCharacter( new int[][] { { 1, 0},{ 2, 0},{ 2, 1} } ) ) );		
 		c.followLeft(); // now back where we started.
-		assertTrue( c.sameGridrefs( new int[][] { { 0, 0},{ 1, 0},{ 2, 0} } ) );
+		assertTrue( c.equals( new SnakeCharacter( new int[][] { { 0, 0},{ 1, 0},{ 2, 0} } ) ) );
 
 		// Circle clockwise left. Starts with head on the left, pointing left.
 		// The head goes through this shape. 0 thru 5 then back to 0.
 		// 345
 		// 210..
-		c = new SnakeCharacter(     new int[][] { { 0, 0},{ 1, 0},{ 2, 0} } );  
+		c = new SnakeCharacter( new int[][] { { 0, 0},{ 1, 0},{ 2, 0} } );  
 		c.followLeft();
-		assertTrue( c.sameGridrefs( new int[][] { {-1, 0},{ 0, 0},{ 1, 0} } ) );
+		assertTrue( c.equals( new SnakeCharacter( new int[][] { {-1, 0},{ 0, 0},{ 1, 0} } ) ) );
 		c.followLeft();
-		assertTrue( c.sameGridrefs( new int[][] { {-2, 0},{-1, 0},{ 0, 0} } ) );
+		assertTrue( c.equals( new SnakeCharacter( new int[][] { {-2, 0},{-1, 0},{ 0, 0} } ) ) );
 		c.followUp();
-		assertTrue( c.sameGridrefs( new int[][] { {-2,-1},{-2, 0},{-1, 0} } ) );		
+		assertTrue( c.equals( new SnakeCharacter( new int[][] { {-2,-1},{-2, 0},{-1, 0} } ) ) );		
 		c.followRight();
-		assertTrue( c.sameGridrefs( new int[][] { {-1,-1},{-2,-1},{-2, 0} } ) );
+		assertTrue( c.equals( new SnakeCharacter( new int[][] { {-1,-1},{-2,-1},{-2, 0} } ) ) );
 		c.followRight();
-		assertTrue( c.sameGridrefs( new int[][] { { 0,-1},{-1,-1},{-2,-1} } ) );		
+		assertTrue( c.equals( new SnakeCharacter( new int[][] { { 0,-1},{-1,-1},{-2,-1} } ) ) );		
 		c.followDown(); // now back where we started.
-		assertTrue( c.sameGridrefs( new int[][] { { 0, 0},{ 0,-1},{-1,-1} } ) );
+		assertTrue( c.equals( new SnakeCharacter( new int[][] { { 0, 0},{ 0,-1},{-1,-1} } ) ) );
 	}	
 	
 }
