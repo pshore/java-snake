@@ -1,11 +1,6 @@
 package com.gmail.pshore.snake;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class SnakeCharacter implements ScreenObject {
-
-	private List<Gridref> positions = new ArrayList<Gridref>();
+public class SnakeCharacter extends ScreenObject implements IScreenObject {
 
 	/** Initialise the Snake with no initial head. */
 	public SnakeCharacter() {		
@@ -13,7 +8,7 @@ public class SnakeCharacter implements ScreenObject {
 	
 	
 	/** 
-	 * Initialise the Snake with a single poistion, the head, at the given position.
+	 * Initialise the Snake with a single position, the head, at the given position.
 	 * @param createHead pass true to create the head of the snake. 
 	 * @param x the X coordinate on the screen. 0 is leftmost.
 	 * @param y the Y coordinate on the screen. 0 is topmost.
@@ -30,24 +25,6 @@ public class SnakeCharacter implements ScreenObject {
 	 */
 	public SnakeCharacter( int[][] refs) {
 		addAll(refs);
-	}
-	
-	/**
-	 * @return the positions
-	 */
-	@Override
-	public List<Gridref> getPositions() {
-		return positions;
-	}
-	
-	/**
-	 * Sets a List of screen positions for this Snake.
-	 * @param positions
-	 * @
-	 */
-	@Override
-	public void setPositions(List<Gridref> positions) {
-		this.positions = positions;
 	}
 	
 	/** Adds positions to the end of the snake */
@@ -145,37 +122,4 @@ public class SnakeCharacter implements ScreenObject {
 		return true;
 	}
 
-	/**
-	 * Checks if this Snake contains the given position. 
-	 * 
-	 * This would indicate a collision for example.
-	 * 
-	 * @return true when the Snake occupies the same as the given position.
-	 */
-	@Override
-	public boolean contains(Gridref position) {
-
-		for(Gridref snakePos : positions) {
-			if(snakePos.equals(position))
-				return true;
-		}
-
-		return false;
-	}
-
-
-	/** Checks if this Snake has any of the given positions. */
-	@Override
-	public boolean containsAny(List<Gridref> positions) {
-		
-		for(Gridref position : positions) {
-			if( contains(position) )
-				return true;
-		}
-		
-		return false;
-	}
-	
-	
-	
 }

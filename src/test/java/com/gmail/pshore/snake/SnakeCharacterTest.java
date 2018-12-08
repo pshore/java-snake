@@ -19,7 +19,7 @@ public class SnakeCharacterTest {
 
 		
 		// constructor that initialises and adds a head at gridref 0,0.
-		c = new SnakeCharacter(true,0,0);
+		c = new SnakeCharacter(0,0);
 		assertEquals(1, c.getPositions().size());
 		Gridref g = c.getPositions().get(0);
 		assertEquals(0, g.getX());
@@ -49,32 +49,32 @@ public class SnakeCharacterTest {
 		
 		// test basic movement with just a head.		
 		
-		c = new SnakeCharacter(true,0,0);
+		c = new SnakeCharacter(0,0);
 		c.follow( new Gridref(-1,0) ); // move left
 		g0 = c.getPositions().get(0);
 		assertTrue( g0.equals(-1, 0) );
 		
-		c = new SnakeCharacter(true,0,0);
+		c = new SnakeCharacter(0,0);
 		c.follow( new Gridref(1,0)); // move right
 		g0 = c.getPositions().get(0);
 		assertTrue( g0.equals(1, 0) );		
 		
-		c = new SnakeCharacter(true,0,0);
+		c = new SnakeCharacter(0,0);
 		c.follow( new Gridref(0,-1)); // move up
 		g0 = c.getPositions().get(0);
 		assertTrue( g0.equals(0,-1) );
 		
-		c = new SnakeCharacter(true,0,0);
+		c = new SnakeCharacter(0,0);
 		c.follow( new Gridref(0,1)); // move down
 		g0 = c.getPositions().get(0);
 		assertTrue( g0.equals(0,1) );
 		
-		c = new SnakeCharacter(true,0,0);
+		c = new SnakeCharacter(0,0);
 		c.follow( new Gridref(1,1)); // move down-right
 		g0 = c.getPositions().get(0);
 		assertTrue( g0.equals(1,1) );
 		
-		c = new SnakeCharacter(true,0,0);
+		c = new SnakeCharacter(0,0);
 		c.follow( new Gridref(-1,0)); // move left
 		c.follow( new Gridref(-1,0)); // move left
 		g0 = c.getPositions().get(0);
