@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The shared code for the objects and characters that will be laid out on the combined screen.
+ * 
+ * @author Phil Shore pshore2@gmail.com
+ *
+ */
 public abstract class ScreenObject implements IScreenObject {
 
 	/** List of positions. Accessible for modification by extending classes. */
@@ -28,15 +34,14 @@ public abstract class ScreenObject implements IScreenObject {
 	}	
 	
 	/**
-	 * Check the size and positions are equal.
+	 * Check the positions are equal.
 	 * 
-	 * @param refs
-	 * @return boolean true if the same size and positions.
+	 * @return boolean true if this object occupies exactly the same locations, and is the same size.
 	 */
 	@Override
 	public boolean equals(Object obj) {	
 		if(obj==null)
-		return false;
+			return false;
 	
 		if( obj.getClass()!=this.getClass() ) 
 			return false;
@@ -45,7 +50,6 @@ public abstract class ScreenObject implements IScreenObject {
 		ScreenObject screenObj = (ScreenObject) obj ;
 		return this.getPositions().equals(screenObj.getPositions());
 	}
-
 
 	@Override
 	public int hashCode() {

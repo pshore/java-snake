@@ -2,6 +2,7 @@ package com.gmail.pshore.snake;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.gmail.pshore.util.VtAnsi;
 
 /**
  * Represents a complete screenfull of characters in two dimensions.
@@ -81,6 +82,10 @@ public abstract class TextFrame {
 	 * Useful for debugging.
 	 */
 	public static void outputFrame(TextFrame frame) {
+				
+		System.out.print( VtAnsi.cursorHome() );
+		System.out.print( VtAnsi.attribute( VtAnsi.ATTR_BRIGHT, VtAnsi.ATTR_FG_RED ) );
+		
 		for(StringBuffer row : frame.rows) {
 			System.out.println(row.toString());
 		}
