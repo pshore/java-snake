@@ -23,7 +23,6 @@ public class VtAnsiScreenOutputter implements ScreenOutputter {
 				
 		out.print( VtAnsi.attribute(VtAnsi.ATTR_HIDDEN, VtAnsi.ATTR_FG_RED) );	// hide the cursor
 		out.print( VtAnsi.eraseAndHome() ); 				// clear the entire screen
-		System.err.println("EraseAndHome");
 		
 		for(ScreenObject screenObject : screenGrid.getLayeredScreenObjects() ) {
 
@@ -35,8 +34,6 @@ public class VtAnsiScreenOutputter implements ScreenOutputter {
 				int line   = gridref.getY();
 
 				out.print( VtAnsi.cursorTo(line, column) );
-				System.err.println("CursorTo l="+line+" c="+column);
-
 				
 				// later we'll push this into separate classes
 				if(screenObject instanceof SnakeCharacter) {
@@ -44,10 +41,6 @@ public class VtAnsiScreenOutputter implements ScreenOutputter {
 						out.print('%'); // the head char
 					else
 						out.print('O'); // the body char
-					
-					System.err.println("output char");
-					
-				//out.print("\007"); // bell
 				}
 			}
 		}
