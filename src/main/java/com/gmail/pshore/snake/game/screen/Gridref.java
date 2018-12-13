@@ -1,4 +1,4 @@
-package com.gmail.pshore.snake;
+package com.gmail.pshore.snake.game.screen;
 
 /**
  * Represents a location on the screen.

@@ -2,7 +2,8 @@ package com.gmail.pshore.snake;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import com.gmail.pshore.snake.Gridref;
+
+import com.gmail.pshore.snake.game.screen.Gridref;
 
 public class GridrefTest {
 

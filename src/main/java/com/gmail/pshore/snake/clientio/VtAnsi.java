@@ -1,13 +1,13 @@
-package com.gmail.pshore.util;
+package com.gmail.pshore.snake.clientio;
 
 /**
  * A helper class for Ansi codes and controls.
  * 
- * @see A useful reference guide http://ascii-table.com/ansi-escape-sequences-vt-100.php
  * @see http://ascii-table.com/ansi-escape-sequences-vt-100.php
+ * @see http://www.termsys.demon.co.uk/vtansi.htm
  * @see https://en.wikipedia.org/wiki/Unicode_control_characters
  * @see https://en.wikipedia.org/wiki/C0_and_C1_control_codes
- * 
+ * @see https://stackoverflow.com/questions/1286461/can-i-find-the-console-width-with-java
  * 
  * @author Phil Shore pshore2@gmail.com
  */
@@ -58,7 +58,7 @@ public class VtAnsi {
 	
 	/** Moves the cursor to the specified location. 0,0 is top left. */
 	public static String cursorTo(int line, int column) {
-		return ESC_SEQ + ((char)line) + ";" + ((char)column) + "H";
+		return ESC_SEQ + line + ";" + column + "H";
 	}
 	
 	/** Erase the screen to background colour and move the cursor to home */
@@ -70,7 +70,7 @@ public class VtAnsi {
 	 * 
 	 * Set the foreground and background colour at the same time:
 	 * 
-	 * 	VtAnsi.attribute( VtAnsi.FG_COLOR_RED, VtAnsi.BG_COLOR_WHITE );
+	 * 	VtAnsi.attribute( VtAnsi.ATTR_FG_RED, VtAnsi.ATTR_BG_WHITE );
 	 * 
 	 * @param attrs One or more attributes.
 	 * @return A string of escape sequence commands.

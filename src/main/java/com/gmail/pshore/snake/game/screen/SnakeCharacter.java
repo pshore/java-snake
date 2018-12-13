@@ -1,8 +1,8 @@
-package com.gmail.pshore.snake;
+package com.gmail.pshore.snake.game.screen;
 
-import java.util.Objects;
+import com.gmail.pshore.snake.game.Move;
 
-public class SnakeCharacter extends ScreenObject implements IScreenObject {
+public class SnakeCharacter extends ScreenObject implements MovableCharacter {
 
 	/** Initialise the Snake with no initial head. */
 	public SnakeCharacter() {		
@@ -58,6 +58,19 @@ public class SnakeCharacter extends ScreenObject implements IScreenObject {
 	public void followRight() { follow( new Gridref(+1, 0) ); }
 	public void followUp()    { follow( new Gridref( 0,-1) ); }
 	public void followDown()  { follow( new Gridref( 0,+1) ); }
+
+	
+	@Override
+	public void move(Move move) {
+		switch(move) {
+			case LEFT: 	followLeft(); 	break;
+			case RIGHT: followRight(); 	break;
+			case UP:	followUp(); 	break;
+			case DOWN:	followDown();	break;
+		}
+	}
+	
+	
 	
 	/**
 	 * Move the Snake head in the direction indicated.
@@ -101,6 +114,5 @@ public class SnakeCharacter extends ScreenObject implements IScreenObject {
 		positions.add(0, newHeadPosition); // add the new head at the front.
 		
 		return positions.get(0);
-	}
-	
+	}	
 }

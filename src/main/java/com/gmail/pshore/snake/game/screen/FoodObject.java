@@ -1,9 +1,9 @@
-package com.gmail.pshore.snake;
+package com.gmail.pshore.snake.game.screen;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FoodObject implements IScreenObject {
+public class FoodObject extends ScreenObject {
 
 	private List<Gridref> positions = new ArrayList<Gridref>();
 	

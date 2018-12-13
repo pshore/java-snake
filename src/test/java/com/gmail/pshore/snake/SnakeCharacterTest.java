@@ -5,7 +5,9 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import org.junit.Test;
-import com.gmail.pshore.snake.SnakeCharacter;
+
+import com.gmail.pshore.snake.game.screen.Gridref;
+import com.gmail.pshore.snake.game.screen.SnakeCharacter;
 
 public class SnakeCharacterTest {
 
@@ -30,10 +32,10 @@ public class SnakeCharacterTest {
 		
 		// test creation from int arrays
 		c = new SnakeCharacter( new int[][] { {0,0},{1,0},{2,0} } );
-		assertEquals(3, c.positions.size());
-		g = c.positions.get(0); assertEquals(0,g.getX()); assertEquals(0,g.getY());
-		g = c.positions.get(1); assertEquals(1,g.getX()); assertEquals(0,g.getY());
-		g = c.positions.get(2); assertEquals(2,g.getX()); assertEquals(0,g.getY());
+		assertEquals(3, c.getPositions().size());
+		g = c.getPositions().get(0); assertEquals(0,g.getX()); assertEquals(0,g.getY());
+		g = c.getPositions().get(1); assertEquals(1,g.getX()); assertEquals(0,g.getY());
+		g = c.getPositions().get(2); assertEquals(2,g.getX()); assertEquals(0,g.getY());
 	}
 	
 	@Test
