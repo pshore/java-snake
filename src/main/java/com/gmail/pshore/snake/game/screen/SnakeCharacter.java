@@ -93,6 +93,40 @@ public class SnakeCharacter extends ScreenObject implements MovableCharacter {
 	 */
 	public Gridref follow(Gridref relative) throws IndexOutOfBoundsException {
 		
+		validateGridrefForFollow(relative);
+
+		// work out the next position for the head
+		int newHeadX = getHead().getX() + relative.getX();
+		int newHeadY = getHead().getY() + relative.getY();
+		
+		// slither the snake to the new head position
+		removeTail();
+		addNewHeadPosition( newHeadX, newHeadY );
+		
+		return getHead();
+	}
+
+	/** Gets the head position. */
+	private Gridref getHead() {
+		return positions.get(0);
+	}
+	
+	private void addNewHeadPosition(int newHeadX, int newHeadY) {
+		Gridref newHeadPosition = new Gridref( newHeadX, newHeadY );		
+		positions.add(0, newHeadPosition); // add the new head at the front.
+	}
+
+	/** Remove the tail, the last position. */
+	private Gridref removeTail() {
+		return positions.remove( positions.size()-1 ); 
+	}
+
+	/** 
+	 * All of the validation for follow(Gridref). 
+	 * Throws an exception if validation does not pass. 
+	 */
+	private void validateGridrefForFollow(Gridref relative) 
+	{
 		/* check the input */
 		if(relative==null) 
 			throw new NullPointerException("Cannot follow a 'null' relative reference");
@@ -104,15 +138,5 @@ public class SnakeCharacter extends ScreenObject implements MovableCharacter {
 			throw new IndexOutOfBoundsException("X is out of range");
 		if(relative.getY()<-1 || relative.getY()>1)
 			throw new IndexOutOfBoundsException("Y is out of range");
-
-		/* now follow the direction */
-		int currHeadX = positions.get(0).getX();
-		int currHeadY = positions.get(0).getY();
-		
-		positions.remove( positions.size()-1 ); // remove the tail
-		Gridref newHeadPosition = new Gridref( currHeadX+relative.getX(), currHeadY+relative.getY() );		
-		positions.add(0, newHeadPosition); // add the new head at the front.
-		
-		return positions.get(0);
 	}	
 }
