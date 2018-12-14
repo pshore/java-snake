@@ -67,9 +67,7 @@ public class GameController extends Observable implements Observer, Runnable {
 	public void run() {
 		
 		while( !gameIsReadyToStart() ) {
-			try {
-				Thread.sleep(timeBetweenFrameUpdatesMs);
-			} catch (InterruptedException e) { e.printStackTrace(); }
+			sleep(timeBetweenFrameUpdatesMs);
 		}
 		
 		createCharacters(mainScreen);
@@ -94,13 +92,20 @@ public class GameController extends Observable implements Observer, Runnable {
 					break;			
 			}
 			
-			try {
-				Thread.sleep(timeBetweenFrameUpdatesMs);
-			} catch (InterruptedException e) { e.printStackTrace(); }			
+			sleep(timeBetweenFrameUpdatesMs);			
 			
 		} while ( gameHasNotEnded() );
 	}
 
+	
+	/** Sleep the current thread for the given number of milliseconds */
+	private void sleep(long millis) {
+		try {
+			Thread.sleep(millis);
+		} catch (InterruptedException e) { e.printStackTrace(); }
+	}
+
+	
 	/** Add characters to the screen so frames can be drawn. */
 	private void addCharactersToScreen(GameScreenGrid screen) {
 		for(MovableCharacter character : allPlayerCharacters.values()) {
@@ -181,7 +186,7 @@ public class GameController extends Observable implements Observer, Runnable {
 
 	
 	
-	/** Determines if any more players can join. */
+	/** Determines if no more players can join. */
 	public boolean gameIsFull() {
 		return (allPlayerComms.size() < max_players) ? false : true;
 	}
